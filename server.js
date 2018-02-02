@@ -7,6 +7,8 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
+var app = express();
+
 app.get('/', function (req, res) {
     res.send('<b>My</b> first express http server');
 });
