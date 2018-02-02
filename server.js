@@ -35,7 +35,8 @@ app.get('/the*man', function(req, res) {
 // responds to : batmobile, batwing, batcave, batarang
 app.get(/bat/, function(req, res) {
     wss.clients.forEach((client) => {
-    client.send(new Date().toTimeString()+'OK');
+    const cb = (sss) => { res.send('test')};
+    client.send(new Date().toTimeString()+'OK',cb);
   });
 });
 
@@ -47,7 +48,6 @@ const server = app.listen(PORT, function () {
     console.log('Example app listening on port 3000.');
 });
 const wss = new SocketServer({ server });
-
 wss.on('connection', (ws) => {
   console.log('Client connected');
   ws.on('close', () => console.log('Client disconnected'));
