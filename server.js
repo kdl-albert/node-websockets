@@ -21,12 +21,12 @@ wss.on('message', function incoming(data) {
   console.log(`Roundtrip time: ${Date.now() - data} ms`);
 
   setTimeout(function timeout() {
-    ws.send(Date.now()+" OK "+ PORT);
+    wss.send(`Roundtrip time: ${Date.now() - data} ms` + Date.now()+" OK "+ PORT);
   }, 500);
 });
 
 setInterval(() => {
   wss.clients.forEach((client) => {
-    client.send(new Date().toTimeString());
+    client.send(new Date().toTimeString()+" OK "+ PORT);
   });
 }, 1000);
