@@ -25,8 +25,13 @@ wss.on('message', function incoming(data) {
   }, 500);
 });
 
-setInterval(() => {
-  wss.clients.forEach((client) => {
-    client.send(new Date().toTimeString()+" OK "+ PORT);
+server.get('/', function (req, res) {
+	res.sendfile(__dirname + '/index.html');
+});
+
+server.get("/api/", function(req, res) {
+	wss.clients.forEach((client) => {
+	res.send('<b>Hello</b> welcome to my http server made with express');
   });
-}, 1000);
+ });
+
