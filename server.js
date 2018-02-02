@@ -17,7 +17,7 @@ wss.on('connection', (ws) => {
   console.log('Client connected');
   ws.on('close', () => console.log('Client disconnected'));
 });
-ws.on('message', function incoming(data) {
+wss.on('message', function incoming(data) {
   console.log(`Roundtrip time: ${Date.now() - data} ms`);
 
   setTimeout(function timeout() {
