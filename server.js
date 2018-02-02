@@ -35,7 +35,11 @@ app.get('/the*man', function(req, res) {
 // responds to : batmobile, batwing, batcave, batarang
 app.get(/bat/, function(req, res) {
     wss.clients.forEach((client) => {
-    const cb = (sss) => { res.send('test')};
+    const cb = (sss) => {
+        console.log(sss);
+        console.log('oooooooooo');
+        res.send('test');
+    };
     client.send(new Date().toTimeString()+'OK',cb);
   });
 });
