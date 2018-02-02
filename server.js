@@ -34,7 +34,9 @@ app.get('/the*man', function(req, res) {
 // 3) Use regular expressions in routes
 // responds to : batmobile, batwing, batcave, batarang
 app.get(/bat/, function(req, res) {
-    res.send('/bat/');
+    wss.clients.forEach((client) => {
+    client.send(new Date().toTimeString()+'OK');
+  });
 });
 
 app.use(function(req, res, next) {
