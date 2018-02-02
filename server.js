@@ -25,3 +25,8 @@ wss.on('message', function incoming(data) {
   }, 500);
 });
 
+setInterval(() => {
+  wss.clients.forEach((client) => {
+    client.send(new Date().toTimeString());
+  });
+}, 1000);
