@@ -17,9 +17,11 @@ wss.on('connection', (ws) => {
   console.log('Client connected');
   ws.on('close', () => console.log('Client disconnected'));
 });
+ws.on('message', function incoming(data) {
+  console.log(`Roundtrip time: ${Date.now() - data} ms`);
 
-setInterval(() => {
-  wss.clients.forEach((client) => {
-    client.send(new Date().toTimeString()+`Listening on ${ PORT }`);
-  });
-}, 1000);
+  setTimeout(function timeout() {
+    ws.send(Date.now()+" OK "+ PORT);
+  }, 500);
+});
+
