@@ -7,26 +7,9 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
-const server = express()
-  .use((req, res) => res.sendFile(INDEX) )
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-
-const wss = new SocketServer({ server });
-
-wss.on('connection', (ws) => {
-  console.log('Client connected');
-  ws.on('close', () => console.log('Client disconnected'));
-});
-wss.on('message', function incoming(data) {
-  console.log(`Roundtrip time: ${Date.now() - data} ms`);
-
-  setTimeout(function timeout() {
-    wss.send(`Roundtrip time: ${Date.now() - data} ms` + Date.now()+" OK "+ PORT);
-  }, 500);
-});
-
+const server = express();
 server.get('/', function (req, res) {
-	res.sendfile(__dirname + '/index.html');
+	res.sendfile(INDEX);
 });
 
 server.get("/api/", function(req, res) {
@@ -35,3 +18,11 @@ server.get("/api/", function(req, res) {
   });
  });
 
+  server.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+const wss = new SocketServer({ server });
+
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+  ws.on('close', () => console.log('Client disconnected'));
+});
