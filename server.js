@@ -36,9 +36,9 @@ app.get('/the*man', function(req, res) {
 app.get(/bat/, function(req, res) {
     wss.clients.forEach((client) => {
     const cb = (sss) => {
-        console.log(sss);
-        console.log('oooooooooo');
-        res.send('test');
+        //console.log(sss);
+        //console.log('oooooooooo');
+        res.send(sss);
     };
     client.send(new Date().toTimeString()+'OK',cb);
   });
