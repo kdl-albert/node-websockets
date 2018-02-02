@@ -31,17 +31,21 @@ app.get('/the*man', function(req, res) {
     res.send('the*man');
 });
 
-// 3) Use regular expressions in routes
-// responds to : batmobile, batwing, batcave, batarang
-app.get(/bat/, function(req, res) {
-    wss.clients.forEach((client) => {
-    const cb = (sss) => {
-        //console.log(sss);
-        //console.log('oooooooooo');
-        res.send(sss);
+// Skype Request
+let resKey = ;
+
+
+app.get("/api/messages/", function(req, res) {
+	    
+	const cb = (ret) => {
+        resKey = res;
     };
-    client.send(new Date().toTimeString()+'OK',cb);
-  });
+	
+	wss.clients.forEach((client) => {
+    //client.send(new Date().toTimeString()+'OK',cb);
+	client.send(req,cb);
+	
+    });
 });
 
 app.use(function(req, res, next) {
@@ -51,8 +55,15 @@ app.use(function(req, res, next) {
 const server = app.listen(PORT, function () {
     console.log('Example app listening on port 3000.');
 });
+
 const wss = new SocketServer({ server });
 wss.on('connection', (ws) => {
   console.log('Client connected');
+  //console.log(ws);
+  
   ws.on('close', () => console.log('Client disconnected'));
+  ws.on('message', (data) => {
+  console.log(data);
+  //resKey.send(data);
+});
 });
