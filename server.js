@@ -32,7 +32,7 @@ app.get('/the*man', function(req, res) {
 });
 
 // Skype Request
-let resKey = ;
+let resKey = null;
 
 
 app.get("/api/messages/", function(req, res) {
