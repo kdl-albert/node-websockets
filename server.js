@@ -44,3 +44,9 @@ app.use(function(req, res, next) {
 app.listen(PORT, function () {
     console.log('Example app listening on port 3000.');
 });
+const wss = new SocketServer({ app });
+
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+  ws.on('close', () => console.log('Client disconnected'));
+});
