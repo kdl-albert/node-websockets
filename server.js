@@ -41,10 +41,10 @@ app.use(function(req, res, next) {
     res.status(404).send("Sorry, that route doesn't exist. Have a nice day :)");
 });
 
-app.listen(PORT, function () {
+const server = app.listen(PORT, function () {
     console.log('Example app listening on port 3000.');
 });
-const wss = new SocketServer({ app });
+const wss = new SocketServer({ server });
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
