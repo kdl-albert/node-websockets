@@ -35,7 +35,7 @@ app.get('/the*man', function(req, res) {
 let resKey = null;
 
 
-app.get("/api/messages/", function(req, res) {
+app.post("/api/messages/", function(req, res) {
 	    
 	const cb = (ret) => {
         resKey = res;
